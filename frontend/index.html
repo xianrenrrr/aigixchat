@@ -79,13 +79,13 @@
             }
             
             try {
-                const response = await fetch('https://aigixchat.onrender.com/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ carType: "new", queryType: messageInput }),
-                });
+                const response = await fetch('https://aigixchat.onrender.com/api/chat', {  // Correct the endpoint URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ carType: "new", queryType: messageInput }),
+            });
                 
                 const data = await response.json();
                 document.getElementById('response').innerText = data.message;

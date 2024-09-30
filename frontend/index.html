@@ -11,9 +11,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             background-color: #f4f4f4;
             margin: 0;
+            padding: 20px;
         }
         .logo {
             width: 150px;
@@ -25,12 +25,13 @@
         }
         .chat-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-bottom: 20px;
         }
         .choice-btn {
             width: 100%;
@@ -50,69 +51,61 @@
             margin-top: 20px;
             font-size: 18px;
             color: #333;
+            text-align: left;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
         }
     </style>
 </head>
 <body>
 
     <div class="logo"></div>
-    <div class="chat-container">
-        <!-- Step 1: 确认车况 -->
-        <div id="question">确认车况：</div>
-        <button class="choice-btn" onclick="selectCarCondition('旧车')">旧车</button>
-        <button class="choice-btn" onclick="selectCarCondition('新车')">新车</button>
-        <button class="choice-btn" onclick="selectCarCondition('已订，未提')">已订，未提</button>
-        <button class="choice-btn" onclick="selectCarCondition('未定，准备定')">未定，准备定</button>
 
-        <!-- Response section -->
+    <div class="chat-container">
+        <!-- Section 1: 确认车况 -->
+        <div class="section-title">确认车况：</div>
+        <button class="choice-btn" onclick="showResponse('旧车')">旧车</button>
+        <button class="choice-btn" onclick="showResponse('新车')">新车</button>
+        <button class="choice-btn" onclick="showResponse('已订，未提')">已订，未提</button>
+        <button class="choice-btn" onclick="showResponse('未定，准备定')">未定，准备定</button>
+
+        <!-- Section 2: 确认为什么咨询彩色TPU车衣 -->
+        <div class="section-title">确认为什么咨询彩色TPU车衣：</div>
+        <button class="choice-btn" onclick="showResponse('两个都了解')">两个都了解</button>
+        <button class="choice-btn" onclick="showResponse('只了解TPU车衣')">只了解TPU车衣</button>
+        <button class="choice-btn" onclick="showResponse('只了解PVC改色膜')">只了解PVC改色膜</button>
+        <button class="choice-btn" onclick="showResponse('两个都不了解')">两个都不了解</button>
+
+        <!-- Responses displayed here -->
         <div id="response" class="response"></div>
     </div>
 
     <script>
-        function selectCarCondition(condition) {
+        function showResponse(choice) {
             let responseText = '';
 
-            // Step 1: Responses for car condition
-            if (condition === '旧车') {
+            // Responses for "确认车况"
+            if (choice === '旧车') {
                 responseText = "旧车改色您咨询TPU彩色车衣就对了，彩色的TPU车衣是新一代车衣产品，它不仅具备普通透明车衣的保护功能，还能提供丰富的颜色选择。TPU车衣的耐久性远高于PVC车膜，并且没有增塑剂的健康风险。";
-            } else if (condition === '新车') {
+            } else if (choice === '新车') {
                 responseText = "确认提车时间，并选择适合的TPU或改色膜。TPU车衣不仅可以保护新车车漆，还可以为您的车提供个性化的颜色选择。如果您不喜欢新车的原厂颜色，可以通过彩色TPU来实现改色，且不会影响车漆本身的价值。";
-            } else if (condition === '已订，未提') {
+            } else if (choice === '已订，未提') {
                 responseText = "您的车已订但还没提车，建议您提前选择好TPU或改色膜。这样等您提车后，我们可以快速为您进行安装，不耽误使用。TPU车衣不但防护性能好，还可以个性化颜色。";
-            } else if (condition === '未定，准备定') {
+            } else if (choice === '未定，准备定') {
                 responseText = "确认是否想选择新能源车，可以考虑我们的TPU彩色车衣来保护您未来的车，特别是新能源车我们有多种选择方案。";
-            }
 
-            // Display the response
-            document.getElementById('response').innerHTML = `
-                ${responseText}
-                <br><br>
-                <button class="choice-btn" onclick="askAboutTPUKnowledge()">继续下一步</button>
-            `;
-        }
-
-        // Step 2: 确认为什么咨询彩色TPU车衣
-        function askAboutTPUKnowledge() {
-            document.getElementById('question').innerText = "确认为什么咨询彩色TPU车衣：";
-            document.getElementById('response').innerHTML = `
-                <button class="choice-btn" onclick="selectTPUKnowledge('两个都了解')">两个都了解</button>
-                <button class="choice-btn" onclick="selectTPUKnowledge('只了解TPU车衣')">只了解TPU车衣</button>
-                <button class="choice-btn" onclick="selectTPUKnowledge('只了解PVC改色膜')">只了解PVC改色膜</button>
-                <button class="choice-btn" onclick="selectTPUKnowledge('两个都不了解')">两个都不了解</button>
-            `;
-        }
-
-        function selectTPUKnowledge(knowledge) {
-            let responseText = '';
-
-            // Step 2: Responses for TPU/PVC knowledge
-            if (knowledge === '两个都了解') {
+            // Responses for "确认为什么咨询彩色TPU车衣"
+            } else if (choice === '两个都了解') {
                 responseText = "彩色TPU车衣是新一代产品，结合了透明车衣的保护功能和PVC改色膜的丰富色彩选择。与PVC相比，TPU车衣更具保护性，并且没有增塑剂的健康风险。";
-            } else if (knowledge === '只了解TPU车衣') {
+            } else if (choice === '只了解TPU车衣') {
                 responseText = "TPU车衣不仅提供保护功能，还可以提供个性化的颜色选择。它还具备自我修复功能，不会因为小刮痕而影响美观。";
-            } else if (knowledge === '只了解PVC改色膜') {
+            } else if (choice === '只了解PVC改色膜') {
                 responseText = "PVC改色膜虽然也有改色功能，但它的使用寿命较短，容易褪色，且可能含有对人体有害的增塑剂。相比之下，TPU车衣使用寿命更长，并且没有健康风险。";
-            } else if (knowledge === '两个都不了解') {
+            } else if (choice === '两个都不了解') {
                 responseText = "彩色TPU车衣结合了透明车衣的保护功能和改色膜的多样化选择，TPU车衣比PVC改色膜更耐用、安全，并且拥有多种颜色可供选择。";
             }
 

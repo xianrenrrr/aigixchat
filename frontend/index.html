@@ -30,15 +30,9 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .chat-input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .submit-btn {
+        .choice-btn {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
@@ -49,7 +43,7 @@
             font-size: 16px;
             cursor: pointer;
         }
-        .submit-btn:hover {
+        .choice-btn:hover {
             background-color: #0056b3;
         }
         .response {
@@ -63,36 +57,35 @@
 
     <div class="logo"></div>
     <div class="chat-container">
-        <input type="text" id="messageInput" class="chat-input" placeholder="Type your message here..." />
-        <button class="submit-btn" onclick="sendMessage()">Send</button>
+        <div id="question">确认车况：</div>
+        
+        <!-- Buttons for choices -->
+        <button class="choice-btn" onclick="selectChoice('旧车')">旧车</button>
+        <button class="choice-btn" onclick="selectChoice('新车')">新车</button>
+        <button class="choice-btn" onclick="selectChoice('已订，未提')">已订，未提</button>
+        <button class="choice-btn" onclick="selectChoice('未定，准备定')">未定，准备定</button>
+
+        <!-- Response section -->
         <div id="response" class="response"></div>
     </div>
 
     <script>
-        async function sendMessage() {
-            const messageInput = document.getElementById('messageInput').value;
-            
-            // Make sure the input is not empty
-            if (!messageInput) {
-                document.getElementById('response').innerText = "Please enter a message.";
-                return;
+        function selectChoice(choice) {
+            let responseText = '';
+
+            // Handle responses based on choice
+            if (choice === '旧车') {
+                responseText = "改色客户或老焕新客户转紫色部分流程";
+            } else if (choice === '新车') {
+                responseText = "确认提车时间，并选择适合的TPU或改色膜";
+            } else if (choice === '已订，未提') {
+                responseText = "确认提车时间，完成其余步骤";
+            } else if (choice === '未定，准备定') {
+                responseText = "确认是否想选择新能源车，并为其提供选择方案";
             }
-            
-            try {
-                const response = await fetch('https://aigixchat.onrender.com/api/chat', {  // Correct the endpoint URL
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ carType: "new", queryType: messageInput }),
-            });
-                
-                const data = await response.json();
-                document.getElementById('response').innerText = data.message;
-            } catch (error) {
-                document.getElementById('response').innerText = "Error: Unable to reach the server.";
-                console.error('Error:', error);
-            }
+
+            // Update the response section
+            document.getElementById('response').innerText = responseText;
         }
     </script>
 

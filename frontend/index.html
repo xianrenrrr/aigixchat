@@ -80,6 +80,13 @@
         <button class="choice-btn" onclick="showResponse('只了解PVC改色膜')">只了解PVC改色膜</button>
         <button class="choice-btn" onclick="showResponse('两个都不了解')">两个都不了解</button>
 
+        <!-- Section 3: 常见问题和详细解答 -->
+        <div class="section-title">常见问题和详细解答：</div>
+        <button class="choice-btn" onclick="showResponse('TPU车衣的优势是什么')">TPU车衣的优势是什么？</button>
+        <button class="choice-btn" onclick="showResponse('PVC改色膜有什么风险')">PVC改色膜有什么风险？</button>
+        <button class="choice-btn" onclick="showResponse('安装彩色TPU车衣需要多长时间')">安装彩色TPU车衣需要多长时间？</button>
+        <button class="choice-btn" onclick="showResponse('TPU车衣的价格是多少')">TPU车衣的价格是多少？</button>
+
         <!-- Responses displayed here -->
         <div id="response" class="response"></div>
     </div>
@@ -107,6 +114,16 @@
                 responseText = "PVC改色膜虽然也有改色功能，但它的使用寿命较短，容易褪色，且可能含有对人体有害的增塑剂。相比之下，TPU车衣使用寿命更长，并且没有健康风险。";
             } else if (choice === '两个都不了解') {
                 responseText = "彩色TPU车衣结合了透明车衣的保护功能和改色膜的多样化选择，TPU车衣比PVC改色膜更耐用、安全，并且拥有多种颜色可供选择。";
+
+            // Responses for 常见问题和详细解答
+            } else if (choice === 'TPU车衣的优势是什么') {
+                responseText = "彩色TPU车衣不仅具备普通透明车衣的保护功能，还可以提供丰富的颜色选择。它的自我修复功能可以让轻微的刮痕在阳光下自行修复，保证您的车始终光亮如新。TPU还不含对健康有害的增塑剂，使用寿命长，非常适合高档车型。";
+            } else if (choice === 'PVC改色膜有什么风险') {
+                responseText = "PVC改色膜中的增塑剂如DEHP和DINP被证实可能对人体有害，长期使用可能对车漆也造成损害。颜色容易褪色，时间久了甚至会在车身上留有残胶。";
+            } else if (choice === '安装彩色TPU车衣需要多长时间') {
+                responseText = "安装彩色TPU车衣通常需要1-2天，具体时间取决于车型和车身的复杂程度。我们会先对车辆进行抛光处理，确保车漆表面干净无瑕疵，然后进行车衣的精准贴合。";
+            } else if (choice === 'TPU车衣的价格是多少') {
+                responseText = "彩色TPU车衣虽然初始价格稍高，但它的耐用性更强，不会像PVC膜那样需要频繁更换。长远来看，TPU车衣更具性价比。";
             }
 
             // Display the response
